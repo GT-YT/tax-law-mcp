@@ -1,17 +1,16 @@
-#!/usr/bin/env node
-
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { createServer } from './server.js';
-
-const server = createServer();
-
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error('Tax Law MCP Server running on stdio');
+export default async function handler(req: Request): Promise<Response> {
+  return new Response(
+    JSON.stringify({
+      ok: true,
+      name: "tax-law-mcp",
+      message: "Vercel HTTP server is working"
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
 }
 
-main().catch((error) => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
